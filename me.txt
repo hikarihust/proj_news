@@ -1,0 +1,14 @@
+===================================== Cấu hình virtual host ==================================
+loacalhost/proj_news = proj_news.xyz
+
+C:\xampp\apache\conf\extra -----------> httpd-vhosts.conf
+    <VirtualHost *:80>
+        ServerAdmin proj_news.xyz
+        DocumentRoot "C:/xampp/htdocs/proj_news/"
+        ServerName proj_news.xyz
+        ErrorLog "logs/proj_news.xyz-error.log"
+        CustomLog "logs/proj_news.xyz-access.log" common
+    </VirtualHost>
+C:\Windows\System32\drivers\etc -----------> hosts
+    127.0.0.1       proj_news.xyz
+    
