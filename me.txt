@@ -52,4 +52,14 @@ Quản lý chi tiết slider: Nhóm tiếp cho slider
     Danh sách slider    http://proj_news.xyz/admin/slider
     Edit slider         http://proj_news.xyz/admin/slider/edit/12
     Xóa slider          http://proj_news.xyz/admin/slider/delete/12
+
+===================================== Controller ==================================
+Với mỗi đường dẫn, router ---> có thể điều hướng đến Controller để thực hiện công việc, task vụ
+Biết cách định nghĩa prefix, Giảm sự lặp lại khi code, dùng Controller định nghĩa cho router
+
+===================================== Controller View ==================================
+Cách khai báo phần view của 1 action nào đó
+===================================== params ==================================
+Cách lấy params từ trên url, trong phần khai báo router mình đã khai báo nhận vào id
+Cách truyền 1 or nhiều giá trị từ action ra ngoài view
     

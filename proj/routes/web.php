@@ -49,19 +49,24 @@ Route::prefix($prefixAdmin)->group(function () {
         return "/admin/user";
     });
 
-    Route::prefix('slider')->group(function () {
-        Route::get('', function () {
-            return "slider List";
-        });
-        Route::get('edit/{id}', function ($id) {
-            return "slide edit" . $id;
-        })->where('id', '[0-9]+');
-        Route::get('delete/{id}', function ($id) {
-            return "slide delete" . $id;
-        })->where('id', '[0-9]+');
+    // =========================== SLIDER ==============================
+    $prefix = 'slider';
+    $controllerName = 'slider';
+    Route::prefix($prefix)->group(function () use ($controllerName) {
+        $controller = ucfirst($controllerName) . 'Controller@';
+        Route::get('/', $controller . 'index');
+        Route::get('edit/{id}', $controller . 'form')->where('id', '[0-9]+');
+        Route::get('delete/{id}', $controller . 'delete')->where('id', '[0-9]+');
     });
 
-    Route::get('category', function () {
-        return "/admin/category";
+    // =========================== CATEGORY ==============================
+    $prefix = 'category';
+    $controllerName = 'category';
+    Route::prefix($prefix)->group(function () use ($controllerName) {
+        $controller = ucfirst($controllerName) . 'Controller@';
+        Route::get('/', $controller . 'index');
+        Route::get('edit/{id}', $controller . 'form')->where('id', '[0-9]+');
+        Route::get('delete/{id}', $controller . 'delete')->where('id', '[0-9]+');
     });
+
 });
