@@ -1,1 +1,7 @@
-<?php echo $title . $id ?></h3>
+<?php
+echo $title . $id;
+echo "</br>";
+$linkList = route($controllerName);
+echo "</br>";
+?>
+<a href="<?php echo $linkList; ?>">List</a>
