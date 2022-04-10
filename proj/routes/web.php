@@ -57,16 +57,7 @@ Route::prefix($prefixAdmin)->group(function () {
         Route::get('/', $controller . 'index');
         Route::get('edit/{id}', $controller . 'form')->where('id', '[0-9]+');
         Route::get('delete/{id}', $controller . 'delete')->where('id', '[0-9]+');
-    });
-
-    // =========================== CATEGORY ==============================
-    $prefix = 'category';
-    $controllerName = 'category';
-    Route::prefix($prefix)->group(function () use ($controllerName) {
-        $controller = ucfirst($controllerName) . 'Controller@';
-        Route::get('/', $controller . 'index');
-        Route::get('edit/{id}', $controller . 'form')->where('id', '[0-9]+');
-        Route::get('delete/{id}', $controller . 'delete')->where('id', '[0-9]+');
+        Route::get('change-status-{status}/{id}', $controller . 'status')->where('id', '[0-9]+');
     });
 
 });
