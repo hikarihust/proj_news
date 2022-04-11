@@ -45,8 +45,12 @@ Route::group(['prefix'=> $prefixAdmin], function () {
 */
 
 Route::prefix($prefixAdmin)->group(function () {
-    Route::get('user', function () {
-        return "/admin/user";
+    // =========================== DASHBOARD ==============================
+    $prefix = 'dashboard';
+    $controllerName = 'dashboard';
+    Route::group(['prefix' => $prefix], function () use ($controllerName) {
+        $controller = ucfirst($controllerName) . 'Controller@';
+        Route::get('/', ['as' => $controllerName, 'uses' => $controller . 'index']);
     });
 
     // =========================== SLIDER ==============================
