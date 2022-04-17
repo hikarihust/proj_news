@@ -88,4 +88,5 @@ split file: Tách tập tin main ra thành nhiều tập tin nhỏ hơn
 menu link: Gắn link cho menu
 =============================== Xây dựng chức năng lấy danh sách Slider ============================
 fix image: fix link cho phần image, tách view cho phần danh sách
+database: Cấu trúc bảng slider, dữ liệu demo và các hình ảnh
     
