@@ -10,4 +10,13 @@ class SliderModel extends Model
     protected $primaryKey ='id';
     const CREATED_AT = 'created';
     const UPDATED_AT = 'modified';
+
+    public function listItems($params = null, $options = null){
+        $result = null;
+        if ($options['task'] === 'admin-list-items') {
+            $result = SliderModel::all();
+        }
+
+        return $result;
+    }
 }

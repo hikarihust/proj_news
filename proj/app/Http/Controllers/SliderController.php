@@ -10,15 +10,18 @@ class SliderController extends Controller
 {
     private $pathViewController = 'admin.pages.slider.';
     private $controllerName = 'slider';
+    private $params         = array();
+    private $model;
 
     public function __construct()
     {
+        $this->model = new MainModel();
         view()->share('controllerName', $this->controllerName);
     }
 
     public function index()
     {
-        $items = MainModel::all();
+        $items = $this->model->listItems($this->params, ['task' => 'admin-list-items']);
         foreach($items as $item) {
             echo $item->name . "</br>";
         }
