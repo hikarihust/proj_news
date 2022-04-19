@@ -22,10 +22,9 @@ class SliderController extends Controller
     public function index()
     {
         $items = $this->model->listItems($this->params, ['task' => 'admin-list-items']);
-        foreach($items as $item) {
-            echo $item->name . "</br>";
-        }
-        return view($this->pathViewController . 'index');
+        return view($this->pathViewController . 'index', [
+            'items' => $items
+        ]);
     }
 
     public function form(Request $request)

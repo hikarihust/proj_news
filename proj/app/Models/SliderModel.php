@@ -14,7 +14,8 @@ class SliderModel extends Model
     public function listItems($params = null, $options = null){
         $result = null;
         if ($options['task'] === 'admin-list-items') {
-            $result = SliderModel::all();
+            $result = SliderModel::select('id', 'name', 'description', 'status', 'link', 'thumb', 'created', 'created_by', 'modified', 'modified_by')
+                                ->get()->toArray();
         }
 
         return $result;
