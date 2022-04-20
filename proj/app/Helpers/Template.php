@@ -18,4 +18,9 @@ class Template {
         $xhtml = sprintf('<a href="%s" type="button" class="btn btn-round %s">%s</a>', $link, $currentTemplateStatus['class'], $currentTemplateStatus['name']);
         return $xhtml;
     }
+
+    public static function showItemThumb ($controllerName, $thumbName, $thumbAlt) {
+        $xhtml = sprintf('<img src="%s" alt="%s" class="zvn-thumb">', asset("images/$controllerName/$thumbName"), $thumbAlt);
+        return $xhtml;
+    }
 }
