@@ -114,4 +114,11 @@ select: Cách thay đổi để viết câu truy vấn làm sao để nó chỉ 
     Nên sử dụng select() và liệt kê ra tên của các field cần lấy chứ không nên dùng select('*')
     Sử dụng self thay cho việc dùng tên class khi thực hiện các câu lệnh truy vấn ở trong chính class đó
     Muốn xem kết quả thu được từ câu query thì dùng $items->toArray()
+=============================== Xây dựng chức năng hiển thị danh sách Slider ============================
+if else - where:
+    Nếu như có dữ liệu thì hiện thị ra danh sách dữ liệu, còn nếu như không có dữ liệu thì hiển thị ra câu
+        thông báo là không có dữ liệu
+    if else khi sử dụng blade template
+    Laravel doc: blade
+    Keyword: Laravel Eloquent where greater than
     
