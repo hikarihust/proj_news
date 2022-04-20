@@ -23,4 +23,24 @@ class Template {
         $xhtml = sprintf('<img src="%s" alt="%s" class="zvn-thumb">', asset("images/$controllerName/$thumbName"), $thumbAlt);
         return $xhtml;
     }
+
+    public static function showButtonAction ($controllerName, $id) {
+        $tmplButton = Config::get('zvn.template.button');
+        $buttonInArea = Config::get('zvn.config.button');
+
+        $controllerName = (array_key_exists($controllerName, $buttonInArea)) ? $controllerName : 'default';
+        $listButtons    = $buttonInArea[$controllerName];
+        $xhtml          = '<div class="zvn-box-btn-filter">';
+        foreach ($listButtons as $key => $btn) {
+            $currentButton = $tmplButton[$btn];
+            $link = route($controllerName . $currentButton['route-name'], ['id' => $id]);
+            $xhtml .= sprintf('<a href="%s" type="button" class="btn btn-icon %s" data-toggle="tooltip" data-placement="top"
+                                data-original-title="%s">
+                                <i class="fa %s"></i>
+                        </a>', $link, $currentButton['class'], $currentButton['title'], $currentButton['icon']);
+        }
+        $xhtml .= '</div>';
+
+        return $xhtml;
+    }
 }
