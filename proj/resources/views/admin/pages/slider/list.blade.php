@@ -1,3 +1,7 @@
+@php
+    use App\Helpers\Template as Template;
+@endphp
+
 <div class="x_content">
     <div class="table-responsive">
         <table class="table table-striped jambo_table bulk_action">
@@ -23,8 +27,8 @@
                             $link = $val['link'];
                             $thumb = $val['thumb'];
                             $status = $val['status'];
-                            $createdHistory = $val['created_by'];
-                            $modifiedHistory = $val['modified_by'];
+                            $createdHistory   = Template::showItemHistory($val['created_by'], $val['created']);
+                            $modifiedHistory  = Template::showItemHistory($val['modified_by'], $val['created']);
                         @endphp
                         <tr class="{{ $class }} pointer">
                             <td> {{ $index }} </td>
