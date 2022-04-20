@@ -15,11 +15,7 @@
                 @if (count($items) > 0)
                     data
                 @else
-                    <tr>
-                        <td colspan="6" class="text-center">
-                            Dữ liệu đang được cập nhật !!
-                        </td>
-                    </tr>
+                    @include('admin.templates.list_empty', ['colspan' => 6])
                 @endif
             </tbody>
         </table>
