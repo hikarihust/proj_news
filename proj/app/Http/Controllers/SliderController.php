@@ -16,6 +16,7 @@ class SliderController extends Controller
     public function __construct()
     {
         $this->model = new MainModel();
+        $this->params["pagination"]["totalItemsPerPage"] = 1;
         view()->share('controllerName', $this->controllerName);
     }
 
@@ -23,6 +24,7 @@ class SliderController extends Controller
     {
         $items = $this->model->listItems($this->params, ['task' => 'admin-list-items']);
         return view($this->pathViewController . 'index', [
+            'params' => $this->params,
             'items' => $items
         ]);
     }
