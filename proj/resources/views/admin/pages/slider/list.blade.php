@@ -26,7 +26,7 @@
                             $description = $val['description'];
                             $link = $val['link'];
                             $thumb = $val['thumb'];
-                            $status = $val['status'];
+                            $status      = Template::showItemStatus($controllerName, $id, $val['status']);
                             $createdHistory   = Template::showItemHistory($val['created_by'], $val['created']);
                             $modifiedHistory  = Template::showItemHistory($val['modified_by'], $val['created']);
                         @endphp
