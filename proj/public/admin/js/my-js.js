@@ -40,4 +40,21 @@ $(document).ready(function() {
 			window.location.href = pathname + '?' + link + 'search_field='+ search_field + '&search_value=' + search_value;
 		}
 	});
+
+	// Khi nhấn nút Clear
+	$btnClearSearch.click(function() {
+		var pathname = window.location.pathname;
+		var searchParams = new URLSearchParams(window.location.search);
+
+		params = ['filter_status'];
+
+		var link = "";
+		$.each(params, function(key, param) {
+			if (searchParams.has(param)) {
+				link += param + "=" + searchParams.get(param) + "&";
+			}
+		})
+
+		window.location.href = pathname + "?" + link.slice(0,-1);
+	})
 });
