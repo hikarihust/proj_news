@@ -3,6 +3,31 @@ namespace App\Helpers;
 use Config;
 
 class Template {
+
+    public static function showButtonFilter ($itemsStatusCount) {
+        $xhtml = null;
+        $tmpStatus = Config::get('zvn.template.status');
+
+        if (count($itemsStatusCount) > 0) {
+            array_unshift($itemsStatusCount, [
+                'count' => array_sum(array_column($itemsStatusCount, 'count')),
+                'status' => 'all'
+            ]);
+
+            foreach ($itemsStatusCount as $item) {
+                $statusValue = $item['status'];
+                $statusValue = array_key_exists($statusValue, $tmpStatus) ? $statusValue : 'default';
+                $currentTemplateStatus = $tmpStatus[$statusValue];
+
+                $xhtml .= sprintf('<a href="#" type="button" class="btn btn-primary">
+                                    %s <span class="badge bg-white">%s</span>
+                                </a>', $currentTemplateStatus['name'], $item['count']);
+            }
+        }
+
+        return $xhtml;
+    }
+
     public static function showItemHistory ($by, $time) {
         $xhtml = sprintf('<p><i class="fa fa-user"></i> %s</p>
                     <p><i class="fa fa-clock-o"></i> %s</p>', $by, date(Config::get('zvn.format.short_time'), strtotime($time)));
