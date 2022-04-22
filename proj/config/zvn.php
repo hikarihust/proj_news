@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'pageRanges' => 5,
     'url' => [
         'prefix_admin' => 'admin'
     ],
