@@ -57,4 +57,9 @@ $(document).ready(function() {
 
 		window.location.href = pathname + "?" + link.slice(0,-1);
 	})
+
+	// Khi nhấn vào nút Button delete phần tử
+	$('.btn-delete').on('click', function() {
+		return confirm('Bạn có chắc xóa phần tử này hay không');
+	})
 });

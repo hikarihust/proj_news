@@ -53,8 +53,10 @@ class SliderController extends Controller
         return redirect()->route($this->controllerName)->with('zvn_notify', trans('notify.change_status'));
     }
 
-    public function delete()
+    public function delete(Request $request)
     {
-        return view($this->pathViewController . 'delete');
+        $params['id'] = $request->id;
+        $this->model->deleteItem($params, ['task' => 'delete-item']);
+        return redirect()->route($this->controllerName)->with('zvn_notify', trans('notify.delete_item'));
     }
 }
