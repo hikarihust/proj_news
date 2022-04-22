@@ -50,7 +50,7 @@ class SliderController extends Controller
         $params['id'] = $request->id;
         $this->model->saveItem($params, ['task' => 'change-status']);
 
-        return redirect()->route($this->controllerName)->with('zvn_notify', 'Cập nhật trạng thái thành công!');
+        return redirect()->route($this->controllerName)->with('zvn_notify', trans('notify.change_status'));
     }
 
     public function delete()

@@ -247,4 +247,5 @@ fix pagination
 - notify:
     Hiển thị lên câu thông báo khi cập nhật trạng thái cho phần tử
     Keyword: Redirecting With Flashed Session Data
+- Localization
     
