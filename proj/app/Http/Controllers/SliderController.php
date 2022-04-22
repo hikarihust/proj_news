@@ -46,10 +46,9 @@ class SliderController extends Controller
 
     public function status(Request $request)
     {
-        echo $request->status;
-        echo "</br>";
-        echo $request->id;
-        echo "</br>";
+        $params['currentStatus'] = $request->status;
+        $params['id'] = $request->id;
+        $this->model->saveItem($params, ['task' => 'change-status']);
 
         return redirect()->route($this->controllerName);
     }
