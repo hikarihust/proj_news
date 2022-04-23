@@ -13,6 +13,17 @@ use App\Helpers\Template as Template;
             <div class="x_panel">
                 @include('admin.templates.x_title', ['title' => 'Form'])
                 <div class="x_content">
+                    {{ Form::open([
+                        'method'         => 'POST',
+                        'url'            => route("$controllerName/save"),
+                        'accept-charset' => 'UTF-8',
+                        'enctype'        => 'multipart/form-data',
+                        'class'          => 'form-horizontal form-label-left',
+                        'id'             => 'main-form'
+                      ]) }}
+                        {!! FormTemplate::show($elements); !!}
+                    {{ Form::close() }}
+
                     <form method="POST" action="http://lar_prepare.xyz/admin123/slider/save" accept-charset="UTF-8"
                         enctype="multipart/form-data" class="form-horizontal form-label-left" id="main-form">
                         <input name="_token" type="hidden" value="dutQIgn8U38T7e7XMeOBAb7gy1so1xFoXAu3xK0y">

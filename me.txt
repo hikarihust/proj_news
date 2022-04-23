@@ -274,4 +274,5 @@ fix pagination
         <h3>test</h3>
         {{ Form::close() }}
     -> Lúc này trên view sẽ tự động sinh ra 1 thẻ input _token ẩn mà ko cần sử dụng @csrf như trong Form của Blade template
+Better Align
     
