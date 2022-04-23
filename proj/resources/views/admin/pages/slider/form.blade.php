@@ -4,15 +4,8 @@ use App\Helpers\Template as Template;
 
 @endphp
 @section('content')
-    <div class="page-header zvn-page-header clearfix">
-        <div class="zvn-page-header-title">
-            <h3>Quản lý Slider</h3>
-        </div>
 
-        <div class="zvn-add-new pull-right">
-            {!! sprintf('<a href="%s" class="btn btn-info"><i class="fa fa-arrow-left"></i> Quay về</a>', route($controllerName)) !!}
-        </div>
-    </div>
+    @include('admin.templates.page_header', ['pageIndex' => false])
 
     <!--box-lists-->
     <div class="row">
