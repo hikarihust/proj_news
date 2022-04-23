@@ -6,6 +6,12 @@ use App\Helpers\Template as Template;
 $formInputAttr = config('zvn.template.form_input');
 $formLabelAttr = config('zvn.template.form_label');
 
+$statusValue = ['default' => 'Select status',
+                  'active' => config('zvn.template.status.active.name'),
+                  'inactive' => config('zvn.template.status.inactive.name')];
+$inputHiddenID = Form::hidden('id', $item['id']);
+$inputHiddenThumb = Form::hidden('thumb_current', $item['thumb']);
+
 $elements = [
     [
       'label'   => Form::label('name', 'Name', $formLabelAttr),
@@ -14,6 +20,18 @@ $elements = [
     [
       'label'   => Form::label('description', 'Description', $formLabelAttr),
       'element' => Form::text('description', $item['description'], $formInputAttr)
+    ],
+    [
+      'label' => Form::label('status', 'Status', $formLabelAttr),
+      'element' => Form::select('status', $statusValue, $item['status'], $formInputAttr)
+    ],
+    [
+      'label' => Form::label('link', 'Link', $formLabelAttr),
+      'element' => Form::text('link', $item['link'], $formInputAttr)
+    ],
+    [
+      'element' => $inputHiddenID . $inputHiddenThumb . Form::submit('Save', ['class' => 'btn btn-success']),
+      'type' => 'btn-submit'
     ]
 ];
 
@@ -37,39 +55,14 @@ $elements = [
                         'id'             => 'main-form'
                       ]) }}
                         {!! FormTemplate::show($elements); !!}
-                        <div class="form-group">
-                            <label for="status" class="control-label col-md-3 col-sm-3 col-xs-12">Status</label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <select class="form-control col-md-6 col-xs-12" id="status" name="status">
-                                    <option value="default">Select status</option>
-                                    <option value="active">Kích hoạt</option>
-                                    <option value="inactive" selected="selected">Chưa kích hoạt</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="link" class="control-label col-md-3 col-sm-3 col-xs-12">Link</label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input class="form-control col-md-6 col-xs-12" name="link" type="text"
-                                    value="https://zendvn.com/uu-dai-hoc-phi-tai-zendvn/" id="link">
-                            </div>
-                        </div>
-                        <div class="form-group">
+                        {{-- <div class="form-group">
                             <label for="thumb" class="control-label col-md-3 col-sm-3 col-xs-12">Thumb</label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <input class="form-control col-md-6 col-xs-12" name="thumb" type="file" id="thumb">
                                 <p style="margin-top: 50px;"><img src="/images/slider/LWi6hINpXz.jpeg"
                                         alt="Ưu đãi học phí" class="zvn-thumb"></p>
                             </div>
-                        </div>
-                        <div class="ln_solid"></div>
-                        <div class="form-group">
-                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                                <input name="id" type="hidden" value="3">
-                                <input name="thumb_current" type="hidden" value="LWi6hINpXz.jpeg">
-                                <input class="btn btn-success" type="submit" value="Save">
-                            </div>
-                        </div>
+                        </div> --}}
                     {{ Form::close() }}
                 </div>
             </div>
