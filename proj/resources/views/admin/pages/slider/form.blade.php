@@ -1,11 +1,21 @@
 @extends('admin.main')
 @php
+use App\Helpers\Form as FormTemplate;
 use App\Helpers\Template as Template;
-$nameLabel = Form::label('name', 'Name', ['class' => 'control-label col-md-3 col-sm-3 col-xs-12']);
-$nameInput = Form::text('name', $item['name'], ['class' => 'form-control col-md-6 col-xs-12']);
 
-$descriptionLabel = Form::label('description', 'Description', ['class' => 'control-label col-md-3 col-sm-3 col-xs-12']);
-$descriptionInput = Form::text('description', $item['description'], ['class' => 'form-control col-md-6 col-xs-12']);
+$formInputAttr = config('zvn.template.form_input');
+$formLabelAttr = config('zvn.template.form_label');
+
+$elements = [
+    [
+      'label'   => Form::label('name', 'Name', $formLabelAttr),
+      'element' => Form::text('name', $item['name'], $formInputAttr)
+    ],
+    [
+      'label'   => Form::label('description', 'Description', $formLabelAttr),
+      'element' => Form::text('description', $item['description'], $formInputAttr)
+    ]
+];
 
 @endphp
 @section('content')
@@ -26,18 +36,7 @@ $descriptionInput = Form::text('description', $item['description'], ['class' => 
                         'class'          => 'form-horizontal form-label-left',
                         'id'             => 'main-form'
                       ]) }}
-                        <div class="form-group">
-                            {!! $nameLabel !!}
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                {!! $nameInput !!}
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            {!! $descriptionLabel !!}
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                {!! $descriptionInput !!}
-                            </div>
-                        </div>
+                        {!! FormTemplate::show($elements); !!}
                         <div class="form-group">
                             <label for="status" class="control-label col-md-3 col-sm-3 col-xs-12">Status</label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
