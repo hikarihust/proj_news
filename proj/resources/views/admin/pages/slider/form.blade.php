@@ -30,6 +30,12 @@ $elements = [
       'element' => Form::text('link', $item['link'], $formInputAttr)
     ],
     [
+        'label' => Form::label('thumb', 'Thumb', $formLabelAttr),
+        'element' => Form::file('thumb', $formInputAttr),
+        'thumb' => (isset($item['thumb']) && ($item['thumb'])) ? Template::showItemThumb($controllerName, $item['thumb'], $item['name']) : null,
+        'type' => 'thumb'
+    ],
+    [
       'element' => $inputHiddenID . $inputHiddenThumb . Form::submit('Save', ['class' => 'btn btn-success']),
       'type' => 'btn-submit'
     ]
@@ -55,14 +61,6 @@ $elements = [
                         'id'             => 'main-form'
                       ]) }}
                         {!! FormTemplate::show($elements); !!}
-                        {{-- <div class="form-group">
-                            <label for="thumb" class="control-label col-md-3 col-sm-3 col-xs-12">Thumb</label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input class="form-control col-md-6 col-xs-12" name="thumb" type="file" id="thumb">
-                                <p style="margin-top: 50px;"><img src="/images/slider/LWi6hINpXz.jpeg"
-                                        alt="Ưu đãi học phí" class="zvn-thumb"></p>
-                            </div>
-                        </div> --}}
                     {{ Form::close() }}
                 </div>
             </div>
