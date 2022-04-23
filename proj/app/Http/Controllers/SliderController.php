@@ -37,11 +37,12 @@ class SliderController extends Controller
 
     public function form(Request $request)
     {
-        $title = "SliderController - form";
-        return view($this->pathViewController . 'form', [
-            'id'    => $request->id,
-            'title' => $title
-        ]);
+        $item = null;
+        if ($request->id) {
+            $params['id'] = $request->id;
+        }
+
+        return view($this->pathViewController . 'form', ['item' => $item]);
     }
 
     public function status(Request $request)
