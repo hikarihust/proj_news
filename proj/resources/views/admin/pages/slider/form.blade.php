@@ -1,6 +1,11 @@
 @extends('admin.main')
 @php
 use App\Helpers\Template as Template;
+$nameLabel = Form::label('name', 'Name', ['class' => 'control-label col-md-3 col-sm-3 col-xs-12']);
+$nameInput = Form::text('name', $item['name'], ['class' => 'form-control col-md-6 col-xs-12']);
+
+$descriptionLabel = Form::label('description', 'Description', ['class' => 'control-label col-md-3 col-sm-3 col-xs-12']);
+$descriptionInput = Form::text('description', $item['description'], ['class' => 'form-control col-md-6 col-xs-12']);
 
 @endphp
 @section('content')
@@ -21,24 +26,16 @@ use App\Helpers\Template as Template;
                         'class'          => 'form-horizontal form-label-left',
                         'id'             => 'main-form'
                       ]) }}
-                        {!! FormTemplate::show($elements); !!}
-                    {{ Form::close() }}
-
-                    <form method="POST" action="http://lar_prepare.xyz/admin123/slider/save" accept-charset="UTF-8"
-                        enctype="multipart/form-data" class="form-horizontal form-label-left" id="main-form">
-                        <input name="_token" type="hidden" value="dutQIgn8U38T7e7XMeOBAb7gy1so1xFoXAu3xK0y">
                         <div class="form-group">
-                            <label for="name" class="control-label col-md-3 col-sm-3 col-xs-12">Name</label>
+                            {!! $nameLabel !!}
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input class="form-control col-md-6 col-xs-12" name="name" type="text"
-                                    value="Ưu đãi học phí" id="name">
+                                {!! $nameInput !!}
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="description" class="control-label col-md-3 col-sm-3 col-xs-12">Description</label>
+                            {!! $descriptionLabel !!}
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input class="form-control col-md-6 col-xs-12" name="description" type="text"
-                                    value="Tổng hợp các trương trình ưu đãi học phí hàng tuần..." id="description">
+                                {!! $descriptionInput !!}
                             </div>
                         </div>
                         <div class="form-group">
@@ -74,7 +71,7 @@ use App\Helpers\Template as Template;
                                 <input class="btn btn-success" type="submit" value="Save">
                             </div>
                         </div>
-                    </form>
+                    {{ Form::close() }}
                 </div>
             </div>
         </div>

@@ -275,4 +275,6 @@ fix pagination
         {{ Form::close() }}
     -> Lúc này trên view sẽ tự động sinh ra 1 thẻ input _token ẩn mà ko cần sử dụng @csrf như trong Form của Blade template
 Better Align
+- name description:
+    Biết cách tạo ra label và ô input bằng cách sử dụng Form collective
     
