@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\SliderModel as MainModel;
+use App\Http\Requests\SliderRequest as MainRequest;
 
 class SliderController extends Controller
 {
@@ -46,13 +47,8 @@ class SliderController extends Controller
         return view($this->pathViewController . 'form', ['item' => $item]);
     }
 
-    public function save(Request $request)
+    public function save(MainRequest $request)
     {
-        $validatedData = $request->validate([
-            'name' => 'required|min:5',
-            'description' => 'required',
-            'link' => 'bail|required|min:5|url',
-        ]);
 
     }
 
