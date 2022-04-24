@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 use DB;
 
 class SliderModel extends Model
@@ -11,6 +12,7 @@ class SliderModel extends Model
     protected $primaryKey ='id';
     const CREATED_AT = 'created';
     const UPDATED_AT = 'modified';
+    protected $folderUpload = '';
     protected $fieldsearchAccepted = [
         'id',
         'name',
@@ -21,8 +23,11 @@ class SliderModel extends Model
     protected $crudNotAccepted = [
         '_token',
         'thumb_current',
-        'thumb',
     ];
+
+    public function __construct() {
+        $this->folderUpload = 'slider';
+    }
 
     public function listItems($params = null, $options = null){
         $result = null;
@@ -93,6 +98,7 @@ class SliderModel extends Model
 
         if ($options['task'] === 'add-item') {
             $params['created_by'] = 'quang';
+            $params['thumb'] = $this->_uploadThumb($params['thumb']);
             $this->insert($this->_prepareParams($params));
         }
     }
@@ -105,5 +111,12 @@ class SliderModel extends Model
 
     protected function _prepareParams($params) {
         return $params = array_diff_key($params, array_flip($this->crudNotAccepted));
+    }
+
+    protected function _uploadThumb($thumbObj) {
+        $thumbName = Str::random(10) . '.' . $thumbObj->clientExtension();
+        $thumbObj->storeAs($this->folderUpload, $thumbName, 'zvn_storage_image');
+
+        return $thumbName;
     }
 }

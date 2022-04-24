@@ -28,17 +28,18 @@ class SliderRequest extends FormRequest
             'description' => 'bail|required',
             'link' => 'bail|required|min:5|url',
             'status' => 'bail|in:active,inactive',
+            'thumb' => 'bail|required|mimes:jpg,png,jpeg,gif,svg|max:100'
         ];
     }
 
     public function messages()
     {
         return [
-            'name.required' => trans('validation.required'),
-            'name.min' => trans('validation.min.string'),
-            'description.required' => trans('validation.required'),
-            'link.required' => trans('validation.required'),
-            'link.min' => trans('validation.min.string')
+            // 'name.required' => trans('validation.required'),
+            // 'name.min' => trans('validation.min.string'),
+            // 'description.required' => trans('validation.required'),
+            // 'link.required' => trans('validation.required'),
+            // 'link.min' => trans('validation.min.string')
         ];
     }
 
@@ -49,6 +50,7 @@ class SliderRequest extends FormRequest
             'description' => 'Description',
             'link' => 'Link',
             'status' => 'Status',
+            'thumb' => 'Thumb',
         ];
     }
 }
