@@ -108,7 +108,12 @@ class SliderModel extends Model
         }
 
         if ($options['task'] === 'edit-item') {
-
+            if (isset($params['thumb']) && !empty($params['thumb'])) {
+                $this->_deleteThumb($params['thumb_current']);
+                $params['thumb'] = $this->_uploadThumb($params['thumb']);
+            }
+            $params['modified_by'] = 'quang';
+            $this->where('id', $params['id'])->update($this->_prepareParams($params));
         }
     }
 
