@@ -15,19 +15,19 @@ $inputHiddenThumb = Form::hidden('thumb_current', $item['thumb']);
 $elements = [
     [
       'label'   => Form::label('name', 'Name', $formLabelAttr),
-      'element' => Form::text('name', $item['name'], $formInputAttr)
+      'element' => Form::text('name', old('name', $item['name']), $formInputAttr)
     ],
     [
       'label'   => Form::label('description', 'Description', $formLabelAttr),
-      'element' => Form::text('description', $item['description'], $formInputAttr)
+      'element' => Form::text('description', old('description', $item['description']), $formInputAttr)
     ],
     [
       'label' => Form::label('status', 'Status', $formLabelAttr),
-      'element' => Form::select('status', $statusValue, $item['status'], $formInputAttr)
+      'element' => Form::select('status', $statusValue, old('status', $item['status']), $formInputAttr)
     ],
     [
       'label' => Form::label('link', 'Link', $formLabelAttr),
-      'element' => Form::text('link', $item['link'], $formInputAttr)
+      'element' => Form::text('link', old('link', $item['link']), $formInputAttr)
     ],
     [
         'label' => Form::label('thumb', 'Thumb', $formLabelAttr),

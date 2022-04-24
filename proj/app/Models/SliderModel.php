@@ -106,6 +106,10 @@ class SliderModel extends Model
             $params['thumb'] = $this->_uploadThumb($params['thumb']);
             $this->insert($this->_prepareParams($params));
         }
+
+        if ($options['task'] === 'edit-item') {
+
+        }
     }
 
     public function deleteItem($params = null, $options = null) {

@@ -23,12 +23,17 @@ class SliderRequest extends FormRequest
      */
     public function rules()
     {
+        $condThumb = 'bail|required|mimes:jpg,png,jpeg,gif,svg|max:500';
+        if (! empty($this->id)) {
+            $condThumb = 'bail|mimes:jpg,png,jpeg,gif,svg|max:500';
+        }
+
         return [
             'name' => 'bail|required|min:5',
             'description' => 'bail|required',
             'link' => 'bail|required|min:5|url',
             'status' => 'bail|in:active,inactive',
-            'thumb' => 'bail|required|mimes:jpg,png,jpeg,gif,svg|max:100'
+            'thumb' => $condThumb
         ];
     }
 
