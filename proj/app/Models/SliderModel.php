@@ -18,6 +18,12 @@ class SliderModel extends Model
         'link'
     ];
 
+    protected $crudNotAccepted = [
+        '_token',
+        'thumb_current',
+        'thumb',
+    ];
+
     public function listItems($params = null, $options = null){
         $result = null;
         if ($options['task'] === 'admin-list-items') {
@@ -84,11 +90,20 @@ class SliderModel extends Model
             $status = ($params['currentStatus'] === 'active') ? 'inactive' : 'active';
             $this->where('id', $params['id'])->update(['status' => $status]);
         }
+
+        if ($options['task'] === 'add-item') {
+            $params['created_by'] = 'quang';
+            $this->insert($this->_prepareParams($params));
+        }
     }
 
     public function deleteItem($params = null, $options = null) {
         if ($options['task'] === 'delete-item') {
             $this->where('id', $params['id'])->delete();
         }
+    }
+
+    protected function _prepareParams($params) {
+        return $params = array_diff_key($params, array_flip($this->crudNotAccepted));
     }
 }

@@ -49,7 +49,19 @@ class SliderController extends Controller
 
     public function save(MainRequest $request)
     {
+        if ($request->method() === 'POST') {
+            $params = $request->all();
 
+            $task   = 'add-item';
+            $notify = trans('notify.add_item');
+
+            if (isset($params['id']) && $params['id']) {
+                $task   = 'edit-item';
+                $notify = trans('notify.edit_item');
+            }
+            $this->model->saveItem($params, ['task' => $task]);
+            return redirect()->route($this->controllerName)->with('zvn_notify', $notify);
+        }
     }
 
     public function status(Request $request)

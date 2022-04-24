@@ -27,6 +27,7 @@ class SliderRequest extends FormRequest
             'name' => 'bail|required|min:5',
             'description' => 'bail|required',
             'link' => 'bail|required|min:5|url',
+            'status' => 'bail|in:active,inactive',
         ];
     }
 
@@ -47,6 +48,7 @@ class SliderRequest extends FormRequest
             'name' => 'Name',
             'description' => 'Description',
             'link' => 'Link',
+            'status' => 'Status',
         ];
     }
 }
