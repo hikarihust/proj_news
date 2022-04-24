@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use DB;
 
@@ -87,6 +88,10 @@ class SliderModel extends Model
                         ->where('id', $params['id'])->first()->toArray();
         }
 
+        if ($options['task'] === 'get-thumb') {
+            $result = $this->select('id', 'thumb')->where('id', $params['id'])->first()->toArray();
+        }
+
         return $result;
     }
 
@@ -105,6 +110,8 @@ class SliderModel extends Model
 
     public function deleteItem($params = null, $options = null) {
         if ($options['task'] === 'delete-item') {
+            $item = $this->getItem($params, ['task' => 'get-thumb']);
+            $this->_deleteThumb($item['thumb']);
             $this->where('id', $params['id'])->delete();
         }
     }
@@ -118,5 +125,9 @@ class SliderModel extends Model
         $thumbObj->storeAs($this->folderUpload, $thumbName, 'zvn_storage_image');
 
         return $thumbName;
+    }
+
+    protected function _deleteThumb($thumbName) {
+        Storage::disk('zvn_storage_image')->delete($this->folderUpload . '/' . $thumbName);
     }
 }
