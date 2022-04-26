@@ -12,6 +12,7 @@
 */
 
 $prefixAdmin = Config::get('zvn.url.prefix_admin', 'admin');
+$prefixNews = Config::get('zvn.url.prefix_news', 'news');
 
 /*
 Route::get('/', function () {
@@ -65,4 +66,16 @@ Route::prefix($prefixAdmin)->group(function () {
         Route::get('change-status-{status}/{id}', ['as' => $controllerName . '/status','uses' => $controller . 'status']);
     });
 
+});
+
+// News
+Route::group(['prefix' => $prefixNews], function () {
+    // =========================== HOMEPAGE ==============================
+    // config để homepage có url là /news
+    $prefix = '';
+    $controllerName = 'home';
+    Route::group(['prefix' => $prefix], function () use ($controllerName) {
+        $controller = ucfirst($controllerName) . 'Controller@';
+        Route::get('/', ['as' => $controllerName, 'uses' => $controller . 'index']);
+    });
 });
