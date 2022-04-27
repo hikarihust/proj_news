@@ -3,8 +3,8 @@
 return [
     'pageRanges' => 5,
     'url' => [
-        'prefix_admin' => 'admin',
-        'prefix_news' => 'news'
+        'prefix_admin' => '_admin',
+        'prefix_news' => 'blog'
     ],
     'format' => [
         'long_time' => 'H:m:s d/m/Y',

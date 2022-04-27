@@ -356,4 +356,6 @@ Better Align
   =============================================== Hiển thị Slider ngoài Frontend ============================================
 - route:
     Tạo link cho trang home
+- theme:
+    Nhúng giao diện cho trang home
     
