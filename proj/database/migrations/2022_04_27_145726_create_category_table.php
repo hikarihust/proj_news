@@ -21,7 +21,7 @@ class CreateCategoryTable extends Migration
             $table->string('created_by', 255)->nullable();
             $table->timestamp('modified')->useCurrent();
             $table->string('modified_by', 255)->nullable();
-            $table->tinyInteger('is_home')->nullable();
+            $table->text('is_home')->nullable();
             $table->string('display', 255)->nullable();
         });
     }

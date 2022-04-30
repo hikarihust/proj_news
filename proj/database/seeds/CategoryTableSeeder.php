@@ -22,7 +22,7 @@ class CategoryTableSeeder extends Seeder
                 'created_by'  => 'admin',
                 'modified'    => '2019-05-12 00:00:00',
                 'modified_by' => 'quangvu',
-                'is_home'     => 1,
+                'is_home'     => 'yes',
                 'display'     => 'list',
             ],
             [
@@ -33,7 +33,7 @@ class CategoryTableSeeder extends Seeder
                 'created_by'  => 'admin',
                 'modified'    => '2019-05-12 00:00:00',
                 'modified_by' => 'quangvu',
-                'is_home'     => 1,
+                'is_home'     => 'yes',
                 'display'     => 'grid',
             ],
             [
@@ -44,7 +44,7 @@ class CategoryTableSeeder extends Seeder
                 'created_by'  => 'admin',
                 'modified'    => '2019-05-15 15:04:33',
                 'modified_by' => 'quangvu',
-                'is_home'     => 0,
+                'is_home'     => 'no',
                 'display'     => 'list',
             ],
             [
@@ -55,7 +55,7 @@ class CategoryTableSeeder extends Seeder
                 'created_by'  => 'admin',
                 'modified'    => '2019-05-15 15:04:30',
                 'modified_by' => 'quangvu',
-                'is_home'     => 0,
+                'is_home'     => 'no',
                 'display'     => 'grid',
             ],
             [
@@ -66,7 +66,7 @@ class CategoryTableSeeder extends Seeder
                 'created_by'  => 'admin',
                 'modified'    => '2019-05-12 00:00:00',
                 'modified_by' => 'quangvu',
-                'is_home'     => 0,
+                'is_home'     => 'no',
                 'display'     => 'list',
             ],
             [
@@ -77,7 +77,7 @@ class CategoryTableSeeder extends Seeder
                 'created_by'  => 'admin',
                 'modified'    => '2019-05-15 15:04:38',
                 'modified_by' => 'quangvu',
-                'is_home'     => 1,
+                'is_home'     => 'no',
                 'display'     => 'grid',
             ],
             [
@@ -88,7 +88,7 @@ class CategoryTableSeeder extends Seeder
                 'created_by'  => 'admin',
                 'modified'    => '2019-05-15 15:04:36',
                 'modified_by' => 'quangvu',
-                'is_home'     => 1,
+                'is_home'     => 'yes',
                 'display'     => 'list',
             ],
             [
@@ -99,7 +99,7 @@ class CategoryTableSeeder extends Seeder
                 'created_by'  => 'admin',
                 'modified'    => '2019-05-15 15:04:36',
                 'modified_by' => 'quangvu',
-                'is_home'     => 0,
+                'is_home'     => 'no',
                 'display'     => 'list',
             ],
         ];
