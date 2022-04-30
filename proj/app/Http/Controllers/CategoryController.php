@@ -81,6 +81,15 @@ class CategoryController extends Controller
         return redirect()->route($this->controllerName)->with('zvn_notify', trans('notify.change_is_home'));
     }
 
+    public function display(Request $request)
+    {
+        $params['currentDisplay'] = $request->display;
+        $params['id'] = $request->id;
+        $this->model->saveItem($params, ['task' => 'change-display']);
+
+        return redirect()->route($this->controllerName)->with('zvn_notify', trans('notify.change_display'));
+    }
+
     public function delete(Request $request)
     {
         $params['id'] = $request->id;

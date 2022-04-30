@@ -6,4 +6,5 @@ return [
     'add_item' => 'Thêm phần tử thành công!',
     'edit_item' => 'Cập nhật phần tủ thành công!',
     'change_is_home' => 'Cập nhật trạng thái hiển thị trang chủ thành công!',
+    'change_display' => 'Cập nhật kiểu hiện thị thành công!',
 ];
