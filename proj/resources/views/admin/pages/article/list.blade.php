@@ -11,6 +11,7 @@ use App\Helpers\Highlight as Highlight;
                     <th class="column-title">#</th>
                     <th class="column-title">Article Info</th>
                     <th class="column-title">Thumb</th>
+                    <th class="column-title">Category</th>
                     <th class="column-title">Trạng thái</th>
                     <th class="column-title">Tạo mới</th>
                     <th class="column-title">Chỉnh sửa</th>
@@ -27,6 +28,7 @@ use App\Helpers\Highlight as Highlight;
                             $name = Highlight::show($val->name, $params['search'], 'name');
                             $content = Highlight::show($val->content, $params['search'], 'content');
                             $thumb = Template::showItemThumb($controllerName, $val->thumb, $val->name);
+                            $categoryName = $val['category_name'];
                             $status = Template::showItemStatus($controllerName, $id, $val->status);
                             $createdHistory = Template::showItemHistory($val->created_by, $val->created);
                             $modifiedHistory = Template::showItemHistory($val->modified_by, $val->created);
@@ -38,7 +40,8 @@ use App\Helpers\Highlight as Highlight;
                                 <p><strong>Name:</strong> {!! $name !!} </p>
                                 <p><strong>Content:</strong>{!! $content !!}</p>
                             </td>
-                            <td>{!! $thumb !!}</td>
+                            <td width="14%"><p>{!! $thumb !!}</p></td>
+                            <td>{!! $categoryName !!}</td>
                             <td>{!! $status !!}</td>
                             <td>{!! $createdHistory !!}</td>
                             <td>{!! $modifiedHistory !!}</td>

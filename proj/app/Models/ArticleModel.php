@@ -11,7 +11,7 @@ class ArticleModel extends AdminModel
 {
     public function __construct()
     {
-        $this->table = 'article';
+        $this->table = 'article as a';
         $this->folderUpload = 'article';
         $this->fieldsearchAccepted = ['name', 'content'];
     }
@@ -20,24 +20,26 @@ class ArticleModel extends AdminModel
     {
         $result = null;
         if ($options['task'] === 'admin-list-items') {
-            $query = $this->select('id', 'name', 'content', 'status', 'thumb', 'created', 'created_by', 'modified', 'modified_by');
+            $query = $this->select('a.id', 'a.name', 'a.content', 'a.status', 'a.thumb', 'a.created', 'a.created_by', 'a.modified', 'a.modified_by', 'c.name AS category_name')
+                            ->leftJoin('category AS c', 'a.category_id', '=', 'c.id');
+
             if ($params['filter']['status'] !== 'all') {
-                $query->where('status', '=', $params['filter']['status']);
+                $query->where('a.status', '=', $params['filter']['status']);
             }
 
             if ($params['search']['value'] !== '') {
                 if ($params['search']['field'] === 'all') {
                     $query->where(function ($query) use ($params) {
                         foreach ($this->fieldsearchAccepted as $column) {
-                            $query->orWhere($column, 'LIKE', "%{$params['search']['value']}%");
+                            $query->orWhere('a.' . $column, 'LIKE', "%{$params['search']['value']}%");
                         }
                     });
                 } else if (in_array($params['search']['field'], $this->fieldsearchAccepted)) {
-                    $query->where($params['search']['field'], 'LIKE', "%{$params['search']['value']}%");
+                    $query->where('a.' . $params['search']['field'], 'LIKE', "%{$params['search']['value']}%");
                 }
             }
 
-            $result = $query->orderBy('id', 'desc')
+            $result = $query->orderBy('a.id', 'desc')
                 ->paginate($params['pagination']['totalItemsPerPage']);
         }
 
