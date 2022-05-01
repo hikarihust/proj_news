@@ -81,7 +81,7 @@ class ArticleModel extends AdminModel
     {
         $result = null;
         if ($options['task'] === 'get-item') {
-            $result = $this->select('id', 'name', 'content', 'status', 'thumb')
+            $result = $this->select('id', 'name', 'content', 'status', 'thumb', 'category_id')
                 ->where('id', $params['id'])->first()->toArray();
         }
 

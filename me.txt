@@ -431,4 +431,7 @@ Better Align
         CKEditor 4
     ArticleController
     ArticleRequest
+- selectbox category: Tạo SelectBox Category lên form article
+    Khi thực hiện thêm mới bài viết thì cần đưa vào thêm 1 field để chọn category
+    Keyword: Laravel get data id name for selectbox -> pluck() 
     
