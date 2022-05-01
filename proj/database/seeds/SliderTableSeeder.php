@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\SliderModel as MainModel;
+use Illuminate\Support\Facades\DB;
 
 class SliderTableSeeder extends Seeder
 {
@@ -52,7 +52,7 @@ class SliderTableSeeder extends Seeder
         ];
 
         foreach ($slider_list as $slider){
-            if (!MainModel::where('name', $slider['name'])->exists()){
+            if (!DB::table('slider')->where('name', $slider['name'])->exists()){
                 DB::table('slider')->insert($slider);
             }
         }

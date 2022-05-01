@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\CategoryModel as MainModel;
+use Illuminate\Support\Facades\DB;
 
 class CategoryTableSeeder extends Seeder
 {
@@ -105,7 +105,7 @@ class CategoryTableSeeder extends Seeder
         ];
 
         foreach ($category_list as $category){
-            if (!MainModel::where('name', $category['name'])->exists()){
+            if (!DB::table('category')->where('name', $category['name'])->exists()){
                 DB::table('category')->insert($category);
             }
         }
