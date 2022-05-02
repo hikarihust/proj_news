@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Collection;
 use Illuminate\Http\Request;
 use App\Models\SliderModel;
 use App\Models\ArticleModel;
@@ -15,6 +16,20 @@ class HomeController extends Controller
     private $params         = array();
     private $model;
 
+    protected $fieldInCategory = [
+        'id',
+        'name',
+        'display'
+    ];
+
+    protected $fieldInArticle = [
+        'id_article',
+        'name_article',
+        'content',
+        'thumb',
+        'created'
+    ];
+
     public function __construct()
     {
 
@@ -24,14 +39,12 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         $sliderModel   = new SliderModel();
-        $categoryModel = new CategoryModel();
+        $articleModel  = new ArticleModel();
 
         $itemsSlider   = $sliderModel->listItems(null, ['task' => 'news-list-items']);
-        $itemsCategory = $categoryModel->listItems(null, ['task' => 'news-list-items-is-home']);
-
-        $articleModel  = new ArticleModel();
         $itemsFeature  = $articleModel->listItems(null, ['task' => 'news-list-items-feature']);
         $itemsLatest   = $articleModel->listItems(null, ['task' => 'news-list-items-latest']);
+        $itemsCategory = $this->_getItemsCategory();
 
         return view($this->pathViewController . 'index', [
             'params' => $this->params,
@@ -40,5 +53,26 @@ class HomeController extends Controller
             'itemsFeature' => $itemsFeature,
             'itemsLatest' => $itemsLatest
         ]);
+    }
+
+    private function _getItemsCategory() {
+        $categoryModel = new CategoryModel();
+        $itemsCategory = $categoryModel->listItems(null, ['task' => 'news-list-items-is-home']);
+        $itemsCategory = new Collection($itemsCategory);
+        $itemsCategory = $itemsCategory->groupBy('id')->toArray();
+        $tmpCategory   = $tmpArticle = $tmpItem = [];
+
+        foreach ($itemsCategory as $val1) {
+            foreach ($val1 as $val2) {
+                $tmpCategory = array_intersect_key($val2, array_flip($this->fieldInCategory));
+                $tmpArticle[] = array_intersect_key($val2, array_flip($this->fieldInArticle));
+            }
+            $tmpItem             = $tmpCategory;
+            $tmpItem['articles'] = $tmpArticle;
+            $result[]            = $tmpItem;
+            $tmpCategory         = $tmpArticle = [];
+        }
+
+        return $result;
     }
 }
