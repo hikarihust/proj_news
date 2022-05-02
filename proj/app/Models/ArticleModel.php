@@ -101,6 +101,10 @@ class ArticleModel extends AdminModel
             $this->where('id', $params['id'])->update(['status' => $status]);
         }
 
+        if ($options['task'] === 'change-type') {
+            $this->where('id', $params['id'])->update(['type' => $params['currentType']]);
+        }
+
         if ($options['task'] === 'add-item') {
             $params['created_by'] = 'quang';
             $params['thumb'] = $this->_uploadThumb($params['thumb']);
