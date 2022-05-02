@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\SliderModel;
+use App\Models\ArticleModel;
 use App\Models\CategoryModel;
 
 class HomeController extends Controller
@@ -28,10 +29,14 @@ class HomeController extends Controller
         $itemsSlider   = $sliderModel->listItems(null, ['task' => 'news-list-items']);
         $itemsCategory = $categoryModel->listItems(null, ['task' => 'news-list-items-is-home']);
 
+        $articleModel  = new ArticleModel();
+        $itemsFeature  = $articleModel->listItems(null, ['task' => 'news-list-items-feature']);
+
         return view($this->pathViewController . 'index', [
             'params' => $this->params,
             'itemsSlider' => $itemsSlider,
-            'itemsCategory' => $itemsCategory
+            'itemsCategory' => $itemsCategory,
+            'itemsFeature' => $itemsFeature
         ]);
     }
 }

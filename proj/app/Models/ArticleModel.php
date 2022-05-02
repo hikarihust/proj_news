@@ -51,6 +51,17 @@ class ArticleModel extends AdminModel
             $result = $query->get()->toArray();
         }
 
+        if ($options['task'] === 'news-list-items-feature') {
+            $query = $this->select('a.id', 'a.name', 'a.content', 'a.created', 'a.category_id', 'c.name AS category_name', 'a.thumb')
+                            ->leftJoin('category AS c', 'a.category_id', '=', 'c.id')
+                            ->where('a.status', '=', 'active')
+                            ->where('a.type', '=', 'feature')
+                            ->orderBy('a.id', 'desc')
+                            ->limit(3);
+
+            $result = $query->get()->toArray();
+        }
+
         return $result;
     }
 
