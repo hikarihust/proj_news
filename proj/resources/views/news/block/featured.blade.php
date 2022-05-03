@@ -20,7 +20,7 @@
             <div class="post_item post_v_large d-flex flex-column align-items-start justify-content-start">
                 <div class="post_item post_v_small d-flex flex-column align-items-start justify-content-start">
                     @include('news.partials.article.image', ['item' => $items[0]])
-                    @include('news.partials.article.content', ['item' => $items[0], 'lenghtContent' => 500])
+                    @include('news.partials.article.content', ['item' => $items[0], 'lenghtContent' => 500,'showCategory' => true])
                 </div>
             </div>
         </div>
@@ -29,7 +29,7 @@
             @foreach ($items as $item)
             <div class="post_item post_v_small d-flex flex-column align-items-start justify-content-start">
                 @include('news.partials.article.image', ['item' => $item])
-                @include('news.partials.article.content', ['item' => $item, 'lenghtContent' => 0])
+                @include('news.partials.article.content', ['item' => $item, 'lenghtContent' => 0, 'showCategory' => true])
             </div>
             @endforeach
         </div>

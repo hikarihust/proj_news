@@ -17,17 +17,18 @@ class HomeController extends Controller
     private $model;
 
     protected $fieldInCategory = [
-        'id',
-        'name',
+        'category_id',
+        'category_name',
         'display'
     ];
 
     protected $fieldInArticle = [
-        'id_article',
-        'name_article',
+        'id',
+        'name',
         'content',
         'thumb',
-        'created'
+        'created',
+        'category_name'
     ];
 
     public function __construct()
@@ -59,7 +60,7 @@ class HomeController extends Controller
         $categoryModel = new CategoryModel();
         $itemsCategory = $categoryModel->listItems(null, ['task' => 'news-list-items-is-home']);
         $itemsCategory = new Collection($itemsCategory);
-        $itemsCategory = $itemsCategory->groupBy('id')->toArray();
+        $itemsCategory = $itemsCategory->groupBy('category_id')->toArray();
         $tmpCategory   = $tmpArticle = $tmpItem = [];
 
         foreach ($itemsCategory as $val1) {

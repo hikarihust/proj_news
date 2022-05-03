@@ -8,9 +8,11 @@ $created = Template::showDatetimeFrontend($item['created']);
 $content  = Template::showContent($item['content'], $lenghtContent);
 @endphp
 <div class="post_content">
+    @if ($showCategory)
     <div class="post_category cat_technology ">
         <a href="{{ $linkCategory }}">{{ $categoryName }}</a>
     </div>
+    @endif
     <div class="post_title"><a href="{{ $linkArticle }}">{{ $name }}</a>
     </div>
     <div class="post_info d-flex flex-row align-items-center justify-content-start">
