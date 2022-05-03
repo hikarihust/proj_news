@@ -96,7 +96,7 @@ Route::prefix($prefixAdmin)->group(function () {
 });
 
 // News
-Route::group(['prefix' => $prefixNews], function () {
+Route::group(['prefix' => $prefixNews, 'namespace' => 'News'], function () {
     // =========================== HOMEPAGE ==============================
     // config để homepage có url là /news
     $prefix = '';
@@ -104,5 +104,16 @@ Route::group(['prefix' => $prefixNews], function () {
     Route::group(['prefix' => $prefix], function () use ($controllerName) {
         $controller = ucfirst($controllerName) . 'Controller@';
         Route::get('/', ['as' => $controllerName, 'uses' => $controller . 'index']);
+    });
+
+    // =========================== CATEGORY ==============================
+    // config để homepage có url là /news68
+    $prefix = 'chuyen-muc';
+    $controllerName = 'category';
+    Route::group(['prefix' => $prefix], function () use ($controllerName) {
+        $controller = ucfirst($controllerName) . 'Controller@';
+        Route::get('/{category_name}-{category_id}.html', ['as' => $controllerName . '/index', 'uses' => $controller . 'index'])
+                ->where('category_name', '[0-9a-zA-Z_-]+')
+                ->where('category_id', '[0-9]+');
     });
 });
