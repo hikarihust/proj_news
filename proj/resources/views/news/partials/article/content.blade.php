@@ -3,7 +3,6 @@ use App\Helpers\Template as Template;
 use App\Helpers\URL;
 
 $name = $item['name'];
-$categoryName = $item['category_name'];
 $linkCategory = ($showCategory) ? URL::linkCategory($item['category_id'], $item['category_name']) : '#';
 $linkArticle      = URL::linkArticle($item['id'], $item['name']);
 $created = Template::showDatetimeFrontend($item['created']);
@@ -16,7 +15,7 @@ if ($lenghtContent === 'full') {
 <div class="post_content">
     @if ($showCategory)
     <div class="post_category cat_technology ">
-        <a href="{{ $linkCategory }}">{{ $categoryName }}</a>
+        <a href="{{ $linkCategory }}">{{ $item['category_name'] }}</a>
     </div>
     @endif
     <div class="post_title"><a href="{{ $linkArticle }}">{{ $name }}</a>

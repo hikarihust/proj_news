@@ -72,6 +72,17 @@ class ArticleModel extends AdminModel
             $result = $query->get()->toArray();
         }
 
+        if ($options['task'] === 'news-list-items-related-in-category') {
+            $query = $this->select('id', 'name', 'content', 'thumb', 'created')
+                            ->where('status', '=', 'active')
+                            ->where('id', '!=', $params['article_id'])
+                            ->where('category_id', '=', $params['category_id'])
+                            ->limit(4);
+
+            $result = $query->get();
+            if($result) $result = $result->toArray();
+        }
+
         return $result;
     }
 
@@ -113,7 +124,7 @@ class ArticleModel extends AdminModel
         }
 
         if ($options['task'] === 'news-get-item') {
-            $result = self::select('a.id', 'a.name', 'a.content', 'a.category_id', 'c.name AS category_name', 'a.thumb', 'a.created')
+            $result = self::select('a.id', 'a.name', 'a.content', 'a.category_id', 'c.name AS category_name', 'a.thumb', 'a.created', 'c.display')
                         ->leftJoin('category AS c', 'a.category_id', '=', 'c.id')
                         ->where('a.id', '=', $params['article_id'])
                         ->where('a.status', '=', 'active')
