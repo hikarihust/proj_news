@@ -105,12 +105,22 @@ class ArticleModel extends AdminModel
         $result = null;
         if ($options['task'] === 'get-item') {
             $result = $this->select('id', 'name', 'content', 'status', 'thumb', 'category_id')
-                ->where('id', $params['id'])->first()->toArray();
+                ->where('id', $params['id'])->first();
         }
 
         if ($options['task'] === 'get-thumb') {
-            $result = $this->select('id', 'thumb')->where('id', $params['id'])->first()->toArray();
+            $result = $this->select('id', 'thumb')->where('id', $params['id'])->first();
         }
+
+        if ($options['task'] === 'news-get-item') {
+            $result = self::select('a.id', 'a.name', 'a.content', 'a.category_id', 'c.name AS category_name', 'a.thumb', 'a.created')
+                        ->leftJoin('category AS c', 'a.category_id', '=', 'c.id')
+                        ->where('a.id', '=', $params['article_id'])
+                        ->where('a.status', '=', 'active')
+                        ->first();
+        }
+
+        if($result) $result = $result->toArray();
 
         return $result;
     }

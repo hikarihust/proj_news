@@ -116,4 +116,14 @@ Route::group(['prefix' => $prefixNews, 'namespace' => 'News'], function () {
                 ->where('category_name', '[0-9a-zA-Z_-]+')
                 ->where('category_id', '[0-9]+');
     });
+
+    // =========================== ARTICLE ==============================
+    $prefix = 'bai-viet';
+    $controllerName = 'article';
+    Route::group(['prefix' => $prefix], function () use ($controllerName) {
+        $controller = ucfirst($controllerName) . 'Controller@';
+        Route::get('/{article_name}-{article_id}.html', ['as' => $controllerName . '/index', 'uses' => $controller . 'index'])
+                ->where('article_name', '[0-9a-zA-Z_-]+')
+                ->where('article_id', '[0-9]+');
+    });
 });

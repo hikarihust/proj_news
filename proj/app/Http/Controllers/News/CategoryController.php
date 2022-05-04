@@ -38,11 +38,11 @@ class CategoryController extends Controller
 
     public function index(Request $request)
     {
-        $articleModel  = new ArticleModel();
-        $itemsLatest   = $articleModel->listItems(null, ['task' => 'news-list-items-latest']);
         $params['category_id'] = $request->category_id;
         $itemCategory = $this->_getItemsCategory($params);
         if(empty($itemCategory)) return redirect()->route('home');
+        $articleModel  = new ArticleModel();
+        $itemsLatest   = $articleModel->listItems(null, ['task' => 'news-list-items-latest']);
 
         return view($this->pathViewController . 'index', [
             'params' => $this->params,
