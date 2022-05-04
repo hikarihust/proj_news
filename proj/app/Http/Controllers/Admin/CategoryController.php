@@ -1,17 +1,16 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\ArticleModel as MainModel;
-use App\Models\CategoryModel;
-use App\Http\Requests\ArticleRequest as MainRequest;
+use App\Models\CategoryModel as MainModel;
+use App\Http\Requests\CategoryRequest as MainRequest;
 
-class ArticleController extends Controller
+class CategoryController extends Controller
 {
-    private $pathViewController = 'admin.pages.article.';
-    private $controllerName = 'article';
+    private $pathViewController = 'admin.pages.category.';
+    private $controllerName = 'category';
     private $params         = array();
     private $model;
 
@@ -45,13 +44,7 @@ class ArticleController extends Controller
             $item = $this->model->getItem($params, ['task' => 'get-item']);
         }
 
-        $categoryModel = new CategoryModel();
-        $itemsCategory = $categoryModel->listItems(null, ['task' => 'admin-list-items-in-selectbox']);
-
-        return view($this->pathViewController . 'form', [
-            'item' => $item,
-            'itemsCategory' => $itemsCategory
-        ]);
+        return view($this->pathViewController . 'form', ['item' => $item]);
     }
 
     public function save(MainRequest $request)
@@ -78,14 +71,6 @@ class ArticleController extends Controller
         $this->model->saveItem($params, ['task' => 'change-status']);
 
         return redirect()->route($this->controllerName)->with('zvn_notify', trans('notify.change_status'));
-    }
-
-    public function type(Request $request)
-    {
-        $params['currentType'] = $request->type;
-        $params['id'] = $request->id;
-        $this->model->saveItem($params, ['task' => 'change-type']);
-        return redirect()->route($this->controllerName)->with('zvn_notify', trans('notify.change_type'));
     }
 
     public function isHome(Request $request)

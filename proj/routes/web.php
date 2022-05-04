@@ -45,7 +45,7 @@ Route::group(['prefix'=> $prefixAdmin], function () {
 
 */
 
-Route::prefix($prefixAdmin)->group(function () {
+Route::group(['prefix' => $prefixAdmin, 'namespace' => 'Admin'], function () {
     // =========================== DASHBOARD ==============================
     $prefix = 'dashboard';
     $controllerName = 'dashboard';

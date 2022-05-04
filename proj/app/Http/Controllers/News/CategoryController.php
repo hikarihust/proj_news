@@ -42,6 +42,7 @@ class CategoryController extends Controller
         $itemsLatest   = $articleModel->listItems(null, ['task' => 'news-list-items-latest']);
         $params['category_id'] = $request->category_id;
         $itemCategory = $this->_getItemsCategory($params);
+        if(empty($itemCategory)) return redirect()->route('home');
 
         return view($this->pathViewController . 'index', [
             'params' => $this->params,
@@ -53,6 +54,10 @@ class CategoryController extends Controller
     private function _getItemsCategory($params) {
         $categoryModel = new CategoryModel();
         $itemsCategory = $categoryModel->getItem($params, ['task' => 'news-get-item']);
+        if (!$itemsCategory[0]['id']) {
+            return null;
+        }
+
         $itemsCategory = new Collection($itemsCategory);
         $itemsCategory = $itemsCategory->groupBy('category_id')->toArray();
         $result = $tmpCategory   = $tmpArticle = $tmpItem = [];
