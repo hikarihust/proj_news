@@ -5,7 +5,7 @@ use App\Helpers\URL;
 $name = $item['name'];
 $categoryName = $item['category_name'];
 $linkCategory = ($showCategory) ? URL::linkCategory($item['category_id'], $item['category_name']) : '#';
-$linkArticle = '#';
+$linkArticle      = URL::linkArticle($item['id'], $item['name']);
 $created = Template::showDatetimeFrontend($item['created']);
 $content  = Template::showContent($item['content'], $lenghtContent);
 @endphp
