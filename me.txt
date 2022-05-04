@@ -515,4 +515,5 @@ Better Align
     Hiển thị theo kiểu của category: danh sách hay lưới
 - show related:
     Khi không có bài viết nào thì không hiển thị phần bài viết liên quan
+Error 404
     
