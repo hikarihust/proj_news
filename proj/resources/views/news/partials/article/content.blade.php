@@ -1,8 +1,10 @@
 @php
 use App\Helpers\Template as Template;
+use App\Helpers\URL;
+
 $name = $item['name'];
 $categoryName = $item['category_name'];
-$linkCategory = '#';
+$linkCategory = ($showCategory) ? URL::linkCategory($item['category_id'], $item['category_name']) : '#';
 $linkArticle = '#';
 $created = Template::showDatetimeFrontend($item['created']);
 $content  = Template::showContent($item['content'], $lenghtContent);

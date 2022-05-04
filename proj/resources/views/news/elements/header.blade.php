@@ -1,6 +1,6 @@
 @php
     use App\Helpers\Menu as Menu;
-    use Illuminate\Support\Str;
+    use App\Helpers\URL;
 
 	$itemsCategory = Menu::listCategories();
 
@@ -13,7 +13,7 @@
 
 		$categoryIdCurrent = Route::input('category_id');
 		foreach ($itemsCategory as $item) {
-			$link = route('category/index', ['category_name' => Str::slug($item['name']), 'category_id' => $item['id']]);
+            $link = URL::linkCategory($item['id'], $item['name']);
 			$classActive = (intval($categoryIdCurrent) === $item['id']) ? 'class="active"' : '';
 			$xhtmlMenu .= sprintf('<li %s><a href="%s">%s</a></li>', $classActive, $link , $item['name']);
 			$xhtmlMenuMobile .= sprintf('<li class="menu_mm"><a href="%s">%s</a></li>',$link , $item['name']);
