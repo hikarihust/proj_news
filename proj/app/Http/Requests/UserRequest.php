@@ -27,6 +27,7 @@ class UserRequest extends FormRequest
         $condAvatar = 'bail|required|mimes:jpg,png,jpeg,gif,svg|max:500';
         $condUserName = "bail|required|between:5,100|unique:$this->table,username";
         $condEmail = "bail|required|email|unique:$this->table,email";
+        $condPass = 'bail|required|between:5,100|confirmed';
         if (! empty($this->id)) {
             $condAvatar = 'bail|mimes:jpg,png,jpeg,gif,svg|max:500';
             $condUserName .= ",$this->id";
@@ -37,7 +38,9 @@ class UserRequest extends FormRequest
             'username' => $condUserName,
             'email' => $condEmail,
             'fullname' => 'bail|required|min:5',
-            'status' => 'bail|in:admin,member',
+            'status' => 'bail|in:active,inactive',
+            'level' => 'bail|in:admin,member',
+            'password' => $condPass,
             'avatar' => $condAvatar
         ];
     }
@@ -60,6 +63,8 @@ class UserRequest extends FormRequest
             'email' => 'Email',
             'fullname' => 'Fullname',
             'status' => 'Status',
+            'level' => 'Level',
+            'password' => 'Password',
             'avatar' => 'Avatar'
         ];
     }
