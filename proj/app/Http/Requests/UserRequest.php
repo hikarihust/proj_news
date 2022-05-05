@@ -24,24 +24,50 @@ class UserRequest extends FormRequest
      */
     public function rules()
     {
-        $condAvatar = 'bail|required|mimes:jpg,png,jpeg,gif,svg|max:500';
-        $condUserName = "bail|required|between:5,100|unique:$this->table,username";
-        $condEmail = "bail|required|email|unique:$this->table,email";
-        $condPass = 'bail|required|between:5,100|confirmed';
-        if (! empty($this->id)) {
-            $condAvatar = 'bail|mimes:jpg,png,jpeg,gif,svg|max:500';
-            $condUserName .= ",$this->id";
-            $condEmail .= ",$this->id";
+        $id = $this->id;
+        $task = $this->task;
+
+        $condAvatar   = '';
+        $condUserName = '';
+        $condEmail    = '';
+        $condPass     = '';
+        $condLevel    = '';
+        $condStatus   = '';
+        $condFullname = '';
+
+        switch ($task) {
+            case 'add':
+                $condUserName   = "bail|required|between:5,100|unique:$this->table,username";
+                $condEmail      = "bail|required|email|unique:$this->table,email";
+                $condFullname   = 'bail|required|min: 5';
+                $condPass       = 'bail|required|between:5,100|confirmed';
+                $condStatus     = 'bail|in:active,inactive';
+                $condLevel      = 'bail|in:admin,member';
+                $condAvatar     = 'bail|required|mimes:jpg,png,jpeg,gif,svg|max:500';
+                break;
+            case 'edit-info':
+                $condUserName   = "bail|required|between:5,100|unique:$this->table,username,$id";
+                $condFullname   = 'bail|required|min: 5';
+                $condAvatar     = 'bail|mimes:jpg,png,jpeg,gif,svg|max:500';
+                $condStatus     = 'bail|in:active,inactive';
+                $condEmail      = "bail|required|email|unique:$this->table,email,$id";
+                break;
+            case 'change-password':
+                break;
+            case 'change-level':
+                break;
+            default:
+                break;
         }
 
         return [
             'username' => $condUserName,
-            'email' => $condEmail,
-            'fullname' => 'bail|required|min:5',
-            'status' => 'bail|in:active,inactive',
-            'level' => 'bail|in:admin,member',
+            'email'    => $condEmail,
+            'fullname' => $condFullname,
+            'status'   => $condStatus,
             'password' => $condPass,
-            'avatar' => $condAvatar
+            'level'    => $condLevel,
+            'avatar'   => $condAvatar
         ];
     }
 
