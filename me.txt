@@ -516,4 +516,8 @@ Better Align
 - show related:
     Khi không có bài viết nào thì không hiển thị phần bài viết liên quan
 Error 404
+ ============================================ Quản lý người dùng ============================================
+
+- list: Trang hiển thị danh sách user
+    md5('123456'): e10adc3949ba59abbe56e057f20f883e
     
