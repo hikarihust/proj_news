@@ -73,6 +73,15 @@ class UserController extends Controller
         return redirect()->route($this->controllerName)->with('zvn_notify', trans('notify.change_status'));
     }
 
+    public function changePassword(MainRequest $request)
+    {
+        if ($request->method() === 'POST') {
+            $params = $request->all();
+            $this->model->saveItem($params, ['task' => 'change-password']);
+            return redirect()->route($this->controllerName)->with('zvn_notify', trans('notify.change_password'));
+        }
+    }
+
     public function level(Request $request)
     {
         $params['currentLevel'] = $request->level;
