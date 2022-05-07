@@ -11,4 +11,5 @@ return [
     'change_level' => 'Cập nhật Level User thành công!',
     'change_password' => 'Thay đổi mật khẩu thành công!',
     'change_level_post' => 'Thay đổi Level thành công!',
+    'auth_login' => 'Tài khoản hoặc mật khẩu không chính xác!',
 ];

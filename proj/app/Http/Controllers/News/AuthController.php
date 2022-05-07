@@ -7,6 +7,8 @@ use Illuminate\Support\Collection;
 use Illuminate\Http\Request;
 use App\Http\Requests\AuthLoginRequest as MainRequest;
 use App\Models\UserModel;
+use Auth;
+use Illuminate\Support\Facades\Auth as FacadesAuth;
 
 class AuthController extends Controller
 {
@@ -29,6 +31,22 @@ class AuthController extends Controller
     {
         if ($request->method() === 'POST') {
             $params = $request->all();
+
+            $user_data = [
+                'email' => $request->email,
+                'password' => $request->password,
+                'status' => 'active',
+            ];
+
+            if(Auth::attempt($user_data))
+            {
+                echo Auth::user()->username;
+            }
+            else
+            {
+                return redirect()->route($this->controllerName . '/login')->with('news_notify', trans('notify.auth_login'));
+            }
+
         }
     }
 
