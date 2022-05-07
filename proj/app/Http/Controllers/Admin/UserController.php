@@ -82,6 +82,15 @@ class UserController extends Controller
         }
     }
 
+    public function changeLevel(MainRequest $request)
+    {
+        if ($request->method() === 'POST') {
+            $params = $request->all();
+            $this->model->saveItem($params, ['task' => 'change-level-post']);
+            return redirect()->route($this->controllerName)->with('zvn_notify', trans('notify.change_level_post'));
+        }
+    }
+
     public function level(Request $request)
     {
         $params['currentLevel'] = $request->level;

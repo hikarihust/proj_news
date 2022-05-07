@@ -10,4 +10,5 @@ return [
     'change_type' => 'Cập nhật kiểu bài viết thành công!',
     'change_level' => 'Cập nhật Level User thành công!',
     'change_password' => 'Thay đổi mật khẩu thành công!',
+    'change_level_post' => 'Thay đổi Level thành công!',
 ];

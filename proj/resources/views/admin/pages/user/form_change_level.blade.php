@@ -6,16 +6,16 @@ $formInputAttr = config('zvn.template.form_input');
 $formLabelAttr = config('zvn.template.form_label_edit');
 
 $inputHiddenID = Form::hidden('id', $item['id']);
-$inputHiddenTask = Form::hidden('task', 'change-password');
+$inputHiddenTask = Form::hidden('task', 'change-level');
+
+$levelValue = ['default' => 'Select level',
+                  'admin' => config('zvn.template.level.admin.name'),
+                  'member' => config('zvn.template.level.member.name')];
 
 $elements = [
     [
-        'label' => Form::label('password', 'Password', $formLabelAttr),
-        'element' => Form::password('password', $formInputAttr),
-    ],
-    [
-        'label' => Form::label('password_confirmation', 'Password Confirmation', $formLabelAttr),
-        'element' => Form::password('password_confirmation', $formInputAttr),
+        'label' => Form::label('level', 'Level', $formLabelAttr),
+        'element' => Form::select('level', $levelValue, $item['level'], $formInputAttr)
     ],
     [
         'element' => $inputHiddenID . $inputHiddenTask . Form::submit('Save', ['class' => 'btn btn-success']),
@@ -27,11 +27,11 @@ $elements = [
 
 <div class="col-md-6 col-sm-12 col-xs-12">
     <div class="x_panel">
-        @include('admin.templates.x_title', ['title' => 'Form Change Password'])
+        @include('admin.templates.x_title', ['title' => 'Quyền truy cập'])
         <div class="x_content">
             {{ Form::open([
                 'method' => 'POST',
-                'url' => route("$controllerName/change-password"),
+                'url' => route("$controllerName/change-level"),
                 'accept-charset' => 'UTF-8',
                 'enctype' => 'multipart/form-data',
                 'class' => 'form-horizontal form-label-left',
