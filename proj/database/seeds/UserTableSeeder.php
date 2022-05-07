@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class UserTableSeeder extends Seeder
 {
@@ -18,7 +19,7 @@ class UserTableSeeder extends Seeder
                 'username'    => 'admin',
                 'email'       => 'admin@gmail.com',
                 'fullname'    => 'admin quang',
-                'password'    => 'e10adc3949ba59abbe56e057f20f883e',
+                'password'    => Hash::make('123456'),
                 'avatar'      => '1ctW8mj8vq.png',
                 'level'       => 'admin',
                 'created'     => '2014-12-10 08:55:35',
@@ -32,7 +33,7 @@ class UserTableSeeder extends Seeder
                 'username'    => 'quangvu',
                 'email'       => 'quangvu@gmail.com',
                 'fullname'    => 'quang vu',
-                'password'    => 'e10adc3949ba59abbe56e057f20f883e',
+                'password'    => Hash::make('123456'),
                 'avatar'      => 'IMiwonX9RE.png',
                 'level'       => 'member',
                 'created'     => '2014-12-10 08:55:35',
@@ -46,7 +47,7 @@ class UserTableSeeder extends Seeder
                 'username'    => 'user123',
                 'email'       => 'test123@gmail.com',
                 'fullname'    => 'user test123',
-                'password'    => 'e10adc3949ba59abbe56e057f20f883e',
+                'password'    => Hash::make('123456'),
                 'avatar'      => 'Hb1QSn1CL8.png',
                 'level'       => 'member',
                 'created'     => '2014-12-10 08:55:35',
@@ -60,7 +61,7 @@ class UserTableSeeder extends Seeder
                 'username'    => 'user456',
                 'email'       => 'user456@gmail.com',
                 'fullname'    => 'user test456',
-                'password'    => 'e10adc3949ba59abbe56e057f20f883e',
+                'password'    => Hash::make('123456'),
                 'avatar'      => 'J1uknUz0T6.png',
                 'level'       => 'member',
                 'created'     => '2014-12-10 08:55:35',
@@ -72,8 +73,8 @@ class UserTableSeeder extends Seeder
         ];
 
         foreach ($user_list as $user){
-            if (!DB::table('user')->where('username', $user['username'])->exists()){
-                DB::table('user')->insert($user);
+            if (!DB::table('users')->where('username', $user['username'])->exists()){
+                DB::table('users')->insert($user);
             }
         }
     }

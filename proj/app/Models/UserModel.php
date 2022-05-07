@@ -5,12 +5,13 @@ namespace App\Models;
 use App\Models\AdminModel;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
 use DB;
 
 class UserModel extends AdminModel
 {
     public function __construct() {
-        $this->table = 'user';
+        $this->table = 'users';
         $this->folderUpload = 'user';
         $this->fieldsearchAccepted = ['id', 'username', 'email', 'fullname'];
         $this->crudNotAccepted = ['_token','avatar_current', 'password_confirmation', 'task'];
@@ -90,7 +91,7 @@ class UserModel extends AdminModel
         if ($options['task'] === 'add-item') {
             $params['created_by'] = 'quang';
             $params['avatar'] = $this->_uploadThumb($params['avatar']);
-            $params['password'] = md5($params['password']);
+            $params['password'] = Hash::make($params['password']);
             $this->insert($this->_prepareParams($params));
         }
 
@@ -114,7 +115,7 @@ class UserModel extends AdminModel
         }
 
         if ($options['task'] === 'change-password') {
-            $password = md5($params['password']);
+            $password = Hash::make($params['password']);
             $this->where('id', $params['id'])->update(['password' => $password]);
         }
     }
