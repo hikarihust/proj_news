@@ -581,3 +581,7 @@ MethodNotAllowedHttpException redirect to 404
         Nếu người dùng đó có level là admin thì truy cập bình thường
         Nếu người dùng đó có level không phải là admin thì sẽ đẩy về trang notify(noPermission)
     
+ ============================================ Nâng cấp lên laravel 8 ============================================
+Nâng cấp từ 5.8 lên 8.x
+    composer update
+    
