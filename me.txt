@@ -562,4 +562,5 @@ Thực hiện chức năng đăng nhập:
     Dựa vào thông tin từ form đăng nhập tìm kiếm trong database xem có giá trị nào trùng khớp hay không, nếu có thì chứng tỏ đó là thông tin của
         người dùng, họ đã đăng nhập thành công. Nếu không có kết quả nào trong database thì chứng tỏ người dùng đã đăng nhập sai
     Khi thông tin user người dùng đã đúng nhưng mà giá trị của status là inactive thì có thể hiển thị lên câu thông báo là tài khoản bị khóa...
+MethodNotAllowedHttpException redirect to 404
     
