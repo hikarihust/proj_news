@@ -40,7 +40,7 @@ class AuthController extends Controller
 
             if(Auth::attempt($user_data))
             {
-                echo Auth::user()->username;
+                return redirect()->route('home');
             }
             else
             {
@@ -52,5 +52,6 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
+        return redirect(route('auth/login'))->with(Auth::logout());
     }
 }

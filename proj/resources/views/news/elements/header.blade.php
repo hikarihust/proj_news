@@ -20,6 +20,11 @@
 		}
 
         $xhtmlMenuUser = sprintf('<li><a href="%s">%s</a></li>', route('auth/login') , 'Đăng nhập');
+		if (Auth::check()) {
+			$xhtmlMenuUser = sprintf('<li><a href="%s">%s</a></li>', route('auth/logout') , 'Logout');
+		} else {
+			$xhtmlMenuUser = sprintf('<li><a href="%s">%s</a></li>', route('auth/login') , 'Login');
+		}
 
         $xhtmlMenu .= $xhtmlMenuUser . '</ul></nav>';
         $xhtmlMenuMobile .= $xhtmlMenuUser . '</ul></nav>';
