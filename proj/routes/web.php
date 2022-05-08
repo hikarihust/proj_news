@@ -45,7 +45,7 @@ Route::group(['prefix'=> $prefixAdmin], function () {
 
 */
 
-Route::group(['prefix' => $prefixAdmin, 'namespace' => 'Admin'], function () {
+Route::group(['prefix' => $prefixAdmin, 'namespace' => 'Admin', 'middleware' => ['permission.admin']], function () {
     // =========================== DASHBOARD ==============================
     $prefix = 'dashboard';
     $controllerName = 'dashboard';
@@ -139,6 +139,14 @@ Route::group(['prefix' => $prefixNews, 'namespace' => 'News'], function () {
         Route::get('/{article_name}-{article_id}.html', ['as' => $controllerName . '/index', 'uses' => $controller . 'index'])
                 ->where('article_name', '[0-9a-zA-Z_-]+')
                 ->where('article_id', '[0-9]+');
+    });
+
+    // =========================== NOTIFY ==============================
+    $prefix = '';
+    $controllerName = 'notify';
+    Route::group(['prefix' => $prefix, 'middleware' => ['permission.member']], function () use ($controllerName) {
+        $controller = ucfirst($controllerName) . 'Controller@';
+        Route::get('/no-permission', ['as' => $controllerName . '/noPermission', 'uses' => $controller . 'noPermission']);
     });
 
     // =========================== LOGIN ==============================
