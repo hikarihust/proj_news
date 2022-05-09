@@ -584,4 +584,5 @@ MethodNotAllowedHttpException redirect to 404
  ============================================ Nâng cấp lên laravel 8 ============================================
 Nâng cấp từ 5.8 lên 8.x
     composer update
+Cài đặt Laravel 8.x và copy source
     
