@@ -586,3 +586,9 @@ Nâng cấp từ 5.8 lên 8.x
     composer update
 Cài đặt Laravel 8.x và copy source
     
+
+ ================================== Xây dựng Admin quản trị tin tức tổng hợp RSS ==================================
+database
+    php artisan make:migration create_rss_table
+    php artisan make:seeder RssSeeder
+    
