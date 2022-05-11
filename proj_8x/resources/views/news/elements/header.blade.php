@@ -19,7 +19,9 @@
 			$xhtmlMenuMobile .= sprintf('<li class="menu_mm"><a href="%s">%s</a></li>',$link , $item['name']);
 		}
 
-        $xhtmlMenuUser = sprintf('<li><a href="%s">%s</a></li>', route('auth/login') , 'Đăng nhập');
+        $xhtmlMenu .= sprintf('<li><a href="%s">Tin tức tổng hợp</a></li>', route('rss/index'));
+        $xhtmlMenuMobile .= sprintf('<li class="menu_mm"><a href="%s">Tin tức tổng hợp</a></li>', route('rss/index'));
+
 		if (Auth::check()) {
 			$xhtmlMenuUser = sprintf('<li><a href="%s">%s</a></li>', route('auth/logout') , 'Logout');
 		} else {

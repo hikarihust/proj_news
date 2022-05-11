@@ -172,4 +172,12 @@ Route::group(['prefix' => $prefixNews, 'namespace' => 'News'], function () {
         // =========================== LOGOUT ==============================
         Route::get('/logout', ['as' => $controllerName . '/logout', 'uses' => $controller . 'logout']);
     });
+
+    // ====================== RSS ========================
+    $prefix         = '';
+    $controllerName = 'rss';
+    Route::group(['prefix' =>  $prefix], function () use ($controllerName) {
+        $controller = ucfirst($controllerName)  . 'Controller@';
+        Route::get('/tin-tuc-tong-hop', [ 'as' => "$controllerName/index", 'uses' => $controller . 'index' ]);
+    });
 });

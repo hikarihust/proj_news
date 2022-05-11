@@ -592,4 +592,9 @@ database
     php artisan make:migration create_rss_table
     php artisan make:seeder RssSeeder
 RSS Admin
+
+ ================================== Xây dựng Frontend hiển thị tin tức RSS ==================================
+
+Đọc RSS VNExpress
+Đọc Rss TuoiTre
     
