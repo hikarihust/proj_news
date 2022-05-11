@@ -43,6 +43,10 @@ return [
             'feature' => ['name' => 'Nổi bật'],
             'normal' => ['name' => 'Bình thường'],
         ],
+        'rss_source' => [
+            'vnexpress'   => ['name'=> 'VNExpress'],
+            'tuoitre'     => ['name'=> 'Tuổi Trẻ'],
+        ],
         'level' => [
             'admin' => ['name' => 'Quản trị hệ thống'],
             'member' => ['name' => 'Người dùng bình thường'],
@@ -70,6 +74,7 @@ return [
             'slider' => ['all', 'id', 'name', 'description', 'link'],
             'category' => ['all', 'id', 'name'],
             'article' => ['all', 'name', 'content'],
+            'rss'       => ['all', 'name', 'link'],
             'user' => ['all', 'username', 'email', 'fullname'],
         ],
         'button' => [
@@ -77,6 +82,7 @@ return [
             'slider'  =>  ['edit', 'delete'],
             'category' => ['edit', 'delete'],
             'article'  =>  ['edit', 'delete'],
+            'rss'   => ['edit', 'delete'],
             'user'  =>  ['edit'],
         ]
     ]
