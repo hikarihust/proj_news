@@ -43,7 +43,7 @@ class Feed
                 $tmp1 = [];
                 $tmp2 = [];
 
-                preg_match('/src="(.+)"/i', $value['description'], $tmp1);
+                preg_match('/src="(.+)".*><\/a>/i', $value['description'], $tmp1);
                 $pattern = '.+br>(.+)';
                 preg_match('/' . $pattern . '/', $value['description'], $tmp2);
 
@@ -69,7 +69,7 @@ class Feed
                 $tmp1 = [];
                 $tmp2 = [];
 
-                preg_match('/src="(.+)"/i', $value['description'], $tmp1);
+                preg_match('/src="(.+)".*><\/a>/i', $value['description'], $tmp1);
                 preg_match('/.+<\/a>(.+)/', $value['description'], $tmp2);
 
                 $data[$key]['description'] = $tmp2[1] ?? $value['description'];

@@ -27,5 +27,10 @@ class RssController extends Controller
 
         $itemsRss   = $rssModel->listItems(null, ['task'   => 'news-list-items']);
         $data = Feed::read($itemsRss);
+
+        return view($this->pathViewController .  'index', [
+            'items'   => $data,
+            'title'   => 'Tin tức tổng hợp',
+        ]);
     }
 }
