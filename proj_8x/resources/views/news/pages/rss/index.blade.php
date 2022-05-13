@@ -14,6 +14,8 @@
                         <div class="col-lg-4">
                             <h3>Giá vàng</h3>
                             @include('news.pages.rss.child-index.box-gold')
+                            <h3>Giá Coin</h3>
+                            @include('news.pages.rss.child-index.box-coin')
                         </div>
                     </div>
                 </div>

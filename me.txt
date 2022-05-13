@@ -602,4 +602,7 @@ Hiển thị danh sách tin
  ================================== Kỹ thuật đọc giá vàng ==================================
 
 Lấy giá vàng SJC XML
+ ================================== Kỹ thuật khai thác API Coinmarketcap ==================================
+
+Khai thác API Coinmarketcap
     

@@ -28,10 +28,12 @@ class RssController extends Controller
         $itemsRss   = $rssModel->listItems(null, ['task'   => 'news-list-items']);
         $data = Feed::read($itemsRss);
         $itemsGold = Feed::getGold();
+        $itemsCoin = Feed::getCoin();
 
         return view($this->pathViewController .  'index', [
             'items'   => $data,
             'itemsGold' => $itemsGold,
+            'itemsCoin' => $itemsCoin,
             'title'   => 'Tin tức tổng hợp',
         ]);
     }
