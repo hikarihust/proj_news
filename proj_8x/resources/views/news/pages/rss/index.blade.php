@@ -8,8 +8,12 @@
                 <div class="container">
                     <div class="row">
                         <!-- Main Content -->
-                        <div class="col-lg-12">
-                            @include('news.pages.rss.child-index.list', ['items' => $items])
+                        <div class="col-lg-8">
+                            @include('news.pages.rss.child-index.list')
+                        </div>
+                        <div class="col-lg-4">
+                            <h3>Giá vàng</h3>
+                            @include('news.pages.rss.child-index.box-gold')
                         </div>
                     </div>
                 </div>

@@ -80,4 +80,21 @@ class Feed
             return [];
         }
     }
+
+    public static function getGold()
+    {
+        $context = stream_context_create(['ssl' => [
+            'verify_peer' => false,
+            "verify_peer_name" => false
+        ]]);
+
+        libxml_set_streams_context($context);
+        $link = 'https://www.sjc.com.vn/xml/tygiavang.xml';
+        $data = simplexml_load_file($link);
+        $data = json_encode($data);
+        $data = json_decode($data, TRUE);
+        $data = $data['ratelist']['city'][0]['item'];
+        $data = array_column($data, '@attributes');
+        return $data;
+    }
 }
