@@ -13,9 +13,13 @@
                         </div>
                         <div class="col-lg-4">
                             <h3>Giá vàng</h3>
-                            @include('news.pages.rss.child-index.box-gold')
+                            <div id="box-gold" class="d-flex align-items-center justify-content-center" data-url="{{ route('rss/get-gold') }}">
+                                <img src="{{ asset('images/loading.gif') }}" alt="">
+                            </div>
                             <h3>Giá Coin</h3>
-                            @include('news.pages.rss.child-index.box-coin')
+                            <div id="box-coin" class="d-flex align-items-center justify-content-center" data-url="{{ route('rss/get-coin') }}">
+                                <img src="{{ asset('images/loading.gif') }}" alt="">
+                            </div>
                         </div>
                     </div>
                 </div>
