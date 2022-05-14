@@ -613,4 +613,5 @@ Ajax hiển thị bảng giá vàng và giá coin
  ================================== Áp dụng ajax cho các chức năng ở Admin ==================================
 
 Ajax Status
+Ajax Is Home
     
