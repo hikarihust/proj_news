@@ -64,6 +64,29 @@ $(document).ready(function() {
 		return confirm('Bạn có chắc xóa phần tử này hay không');
 	})
 
+    $(".status-ajax").on("click", function () {
+        let url = $(this).data("url");
+        let btn = $(this);
+        let currentClass = btn.data("class");
+        $.ajax({
+            type: "GET",
+            url: url,
+            dataType: "json",
+            success: function (response) {
+                btn.removeClass(currentClass);
+                btn.addClass(response.statusObj.class);
+                btn.html(response.statusObj.name);
+                btn.data("url", response.link);
+                btn.data("class", response.statusObj.class);
+                btn.notify("Cập nhật thành công", {
+                    position: "top center",
+                    className: "success",
+                    autoHideDelay: 4000,
+                });
+            },
+        });
+    });
+
 	// Khi thay đổi ở SelectBox để thay đổi giá trị kiểu hiển thị Category lên trên view index
 	$selectChangeAttr.on('change', function() {
 		let selectValue = $(this).val();

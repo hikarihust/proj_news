@@ -69,8 +69,14 @@ class RssController extends Controller
         $params['currentStatus'] = $request->status;
         $params['id'] = $request->id;
         $this->model->saveItem($params, ['task' => 'change-status']);
-
-        return redirect()->route($this->controllerName)->with('zvn_notify', trans('notify.change_status'));
+        $status = $request->status == 'active' ? 'inactive' : 'active';
+        $link = route($this->controllerName . '/status', ['status' => $status, 'id' => $request->id]);
+        $status = $request->status == 'active' ? 'inactive' : 'active';
+        $link = route($this->controllerName . '/status', ['status' => $status, 'id' => $request->id]);
+        return response()->json([
+            'statusObj' => config('zvn.template.status')[$status],
+            'link' => $link,
+        ]);
     }
 
     public function delete(Request $request)

@@ -609,4 +609,8 @@ Khai thác API Coinmarketcap
  ================================== Áp dụng ajax cho phần Frontend tin tức tổng hợp ==================================
 
 Ajax hiển thị bảng giá vàng và giá coin
+
+ ================================== Áp dụng ajax cho các chức năng ở Admin ==================================
+
+Ajax Status
     
