@@ -112,8 +112,22 @@ $(document).ready(function() {
 
 	// Khi thay đổi ở SelectBox để thay đổi giá trị kiểu hiển thị Category lên trên view index
 	$selectChangeAttr.on('change', function() {
-		let selectValue = $(this).val();
-		let url = $(this).data('url');
-		window.location.href = url.replace('value_new', selectValue);
+        let ele = $(this);
+        let selectValue = $(this).val();
+        let url = $(this).data('url');
+        url = url.replace('value_new', selectValue);
+        $.ajax({
+            type: "GET",
+            url: url,
+            dataType: "json",
+            success: function (response) {
+                ele.notify("Cập nhật thành công", {
+                    position: "top center",
+                    className: "success",
+                    autoHideDelay: 4000,
+                });
+            },
+        });
+
 	})
 });

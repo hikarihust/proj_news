@@ -97,8 +97,9 @@ class CategoryController extends Controller
         $params['currentDisplay'] = $request->display;
         $params['id'] = $request->id;
         $this->model->saveItem($params, ['task' => 'change-display']);
-
-        return redirect()->route($this->controllerName)->with('zvn_notify', trans('notify.change_display'));
+        return response()->json([
+            'status' => 'success'
+        ]);
     }
 
     public function delete(Request $request)

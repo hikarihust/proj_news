@@ -91,7 +91,9 @@ class ArticleController extends Controller
         $params['currentType'] = $request->type;
         $params['id'] = $request->id;
         $this->model->saveItem($params, ['task' => 'change-type']);
-        return redirect()->route($this->controllerName)->with('zvn_notify', trans('notify.change_type'));
+        return response()->json([
+            'status' => 'success'
+        ]);
     }
 
     public function isHome(Request $request)
