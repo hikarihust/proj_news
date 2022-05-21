@@ -1,0 +1,36 @@
+#postfix install
+yum install postfix mailx cyrus-sasl-plain cyrus-sasl-md5 -y
+
+#Postfix configuration
+vi /etc/postfix/main.cf
+
+#add to main.cf
+relayhost = [email-smtp.ap-northeast-1.amazonaws.com]:587
+smtp_sasl_auth_enable = yes
+smtp_sasl_security_options = noanonymous
+smtp_sasl_password_maps = hash:/etc/postfix/sasl_passwd
+smtp_use_tls = yes
+smtp_tls_security_level = encrypt
+smtp_tls_note_starttls_offer = yes
+
+vi /etc/postfix/sasl_passwd
+[email-smtp.ap-northeast-1.amazonaws.com]:587 AKIARX2RASAN5WHCTN7E:BLHZibOfU1mZss/MZBwGdGNo9HaCm+vJ56wSHwLa91T1
+
+$ postmap hash:/etc/postfix/sasl_passwd
+$ chmod 600 /etc/postfix/sasl_passwd.db
+
+# remove /etc/postfix/sasl_passwd
+sudo rm /etc/postfix/sasl_passwd
+
+#Send a test mail
+echo "Gui test email" | mail -r info@coderworking.com -s "Gui test email from Amazon" quang-vu@dimage.co.jp
+
+#Start postfix
+systemctl start postfix
+
+# telnet 
+yum install telnet -y
+telnet email-smtp.ap-northeast-1.amazonaws.com 587
+
+# check log 
+tail -f /var/log/maillog
