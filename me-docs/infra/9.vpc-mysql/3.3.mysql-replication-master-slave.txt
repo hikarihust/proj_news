@@ -1,0 +1,145 @@
+MySQL :How to Configure MySQL Master-Slave Replication on RHEL 
+*********************************************************************
+
+
+MySQL replication  procedure enabled you to automatically copy data from one MYSQL database server to one or more MYSQL servers.
+
+MySQL supports a number of replication topologies with Master/Slave topology being one of the most well-known topologies in which
+
+one database server acts as the master, while one or more servers act as slaves. By default, the replication is asynchronous where
+
+the master sends events that describe database modifications to its binary log and slaves request the events when they are ready.
+
+
+   This sort of replication topology is good for deploying of read replicas for read scaling, live databases backup
+
+for disaster recovery and for analytics jobs.
+
+
+MySQL 8.0 supports different methods of replication. The traditional method is based on replicating events from the master's binary log,
+
+and requires the log files and positions in them to be synchronized between master and slave.
+
+
+Prerequisites
+*************
+
+Setup
+*******
+ROLE  HOST    OS   MYSQL SERVER VERSION
+
+Master  172.27.17.32(db)         Centos 7    8.0.29
+Slave   172.27.19.162(db_slave)  Centos 7    8.0.29
+
+
+vaidate value of 
+
+show variables like '%uuid%';
+
+
+Step 1: Configure the Master Server.
+*************************************
+
+-Let's configure the master MySQL server and perform  below changes.
+
+-enable MySQL server to listen on the private IP.
+-Set a unique server ID.
+-Enable the binary logging.
+
+
+
+# 
+
+cp /etc/my.cnf /etc/my.cnf_bkp_20200610
+vi /etc/my.cnf
+
+bind-address = 172.27.17.32
+server-id = 1
+log_bin = /var/log/mysql-bin
+
+
+-Once done, restart the MySQL service for changes to take effect
+
+# service mysqld restart
+
+-create a new replication user who  can login master server from slave server.
+
+[root@db ~]# 
+
+mysql -u root -p
+Mysql@1234
+
+
+SHOW MASTER STATUS\G
+*************************** 1. row ***************************
+             File: mysql-bin.000022
+         Position: 155
+     Binlog_Do_DB:
+ Binlog_Ignore_DB:
+Executed_Gtid_Set:
+1 row in set (0.01 sec)
+
+
+CREATE USER 'replica'@'172.27.19.162' IDENTIFIED WITH  mysql_native_password BY 'Password@123';
+GRANT REPLICATION SLAVE ON *.* TO 'replica'@'172.27.19.162';
+Select host, user  from mysql.user;
+
+
+[root@db_slave ~]# mysql -u replica -h 172.27.17.32 -p
+
+
+
+Step 2 : [root@db_slave ~]#CONFIGURE THE SLAVE SERVER
+***************************************************
+Like master server perform below changes on slave server.
+
+Set the MySQL server to listen on the private IP
+Set a unique server ID
+Enable the binary logging
+
+
+slave:/etc/my.cnf
+cp /etc/my.cnf /etc/my.cnf_orig
+
+
+vi /etc/my.cnf 
+bind-address = 172.27.19.162
+server-id = 2
+log_bin = /var/log/mysql-bin
+
+# service mysqld restart
+
+
+Step 3: Configure the parameters for slave server  to connect to the master server.
+***********************************************************************************
+
+mysql -uroot -p
+Mysql@1234
+
+STOP SLAVE;
+CHANGE MASTER TO
+MASTER_HOST='172.27.17.32',
+MASTER_USER='replica',
+MASTER_PASSWORD='Password@123',
+MASTER_LOG_FILE='mysql-bin.000023',
+MASTER_LOG_POS=686;
+
+
+start slave;
+show slave status\G;
+
+
+show variables like '%uuid%';
+
+
+testing
+*******
+
+Create database testreplica;
+use testreplica;
+CREATE TABLE `departments` (
+  `dept_no` char(4) NOT NULL,
+  `dept_name` varchar(40) NOT NULL,
+  PRIMARY KEY (`dept_no`),
+  UNIQUE KEY `dept_name` (`dept_name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
